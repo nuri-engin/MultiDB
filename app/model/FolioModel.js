@@ -8,7 +8,9 @@ Ext.define('MultiDB.model.FolioModel', {
         {name: 'checkin', type: 'date'},
         {name: 'checkout', type: 'date'},
         {name: 'citime', type: 'date'},
-        {name: 'isactive', type: 'bool'}
+        {name: 'isactive', type: 'bool'},
+        {name: 'balanceok', type: 'bool'},
+        {name: 'lastbalance', type: 'int'}
     ],
 
     idProperty: 'gid',

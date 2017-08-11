@@ -74,7 +74,8 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 xtype: 'datecolumn',
                 dataIndex: 'checkin',
                 flex: 1,
-                text: 'Check-In'
+                text: 'Check-In',
+                format: 'l, F, Y'
             }, {
                 xtype: 'datecolumn',
                 dataIndex: 'checkout',
@@ -85,6 +86,7 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 dataIndex: 'citime',
                 flex: 1,
                 text: 'C-In Time',
+                format: 'G:i',
                 renderer: function (value, record) {
                     if (value == null) {
                         return "N/A";
@@ -97,6 +99,17 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 dataIndex: 'isactive',
                 flex: 1,
                 text: 'Is-Active'
+            }, {
+                dataIndex: 'balanceok',
+                flex: 1,
+                text: 'Balance',
+                renderer: function (value, record) {
+                    if (value == 0) {
+                        return "All Paid";
+                    } else {
+                        return getRecord('lastbalance');
+                    }
+                }
             }]
         });
         me.callParent();
