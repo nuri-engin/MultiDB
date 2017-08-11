@@ -7,6 +7,7 @@ Ext.define('MultiDB.model.FolioModel', {
         {name: 'roomtype', type: 'string'},
         {name: 'checkin', type: 'date'},
         {name: 'checkout', type: 'date'},
+        {name: 'citime', type: 'date'},
         {name: 'isactive', type: 'bool'}
     ],
 

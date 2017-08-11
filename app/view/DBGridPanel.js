@@ -55,10 +55,13 @@ Ext.define('MultiDB.view.DBGridPanel', {
             }],
 
             columns: [{
+                xtype: 'rownumberer'
+            }, {
                 xtype: 'numbercolumn',
                 dataIndex: 'roomno',
                 flex: 0,
-                text: 'Room No'
+                text: 'Room No',
+                format: '0'
             }, {
                 dataIndex: 'clientname',
                 flex: 1,
@@ -77,6 +80,18 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 dataIndex: 'checkout',
                 flex: 1,
                 text: 'Check-Out'
+            },{
+                xtype: 'datecolumn',
+                dataIndex: 'citime',
+                flex: 1,
+                text: 'C-In Time',
+                renderer: function (value, record) {
+                    if (value == null) {
+                        return "N/A";
+                    } else {
+                        return value;
+                    }
+                }
             }, {
                 xtype: 'booleancolumn',
                 dataIndex: 'isactive',
