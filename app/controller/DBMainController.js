@@ -1,17 +1,22 @@
 Ext.define('MultiDB.controller.DBMainController', {
     extend: 'Ext.app.Controller',
+    views: ['DBGridPanel'],
 
     refs: {
         formPanel: 'dbformpanel#formPanel',
         gridPanel: 'dbgridpanel#gridPanel',
         mainView: 'dbmainview#mainView',
-        registrationBtn: 'splitbutton#registrationBtn'
+        registrationBtn: 'splitbutton#registrationBtn',
+        refreshBtn: 'dbmainview dbgridpanel#refreshBtn'
     },
 
     init: function (application) {
         this.control({
             "menuitem[opt]": {
                 click: this.setFormPanel
+            },
+            "dbmainview dbgridpanel#refreshBtn": {
+                viewready: this.doRefresh
             }
         });
     },
@@ -41,6 +46,10 @@ Ext.define('MultiDB.controller.DBMainController', {
         }
 
         registrationBtn.setText(previewText);
+    },
+    doRefresh: function () {
+        console.log('this is do init!');
+        this.getGridPanel().getStore().load();
     }
 
 });

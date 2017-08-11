@@ -45,13 +45,13 @@ Ext.define('MultiDB.view.DBGridPanel', {
     ],
     
     initComponent: function () {
-        //console.log('this is grid panel!');
         var me = this;
         Ext.apply(me, {
             tools: [{
                 type: 'refresh',
+                itemId: 'refreshBtn',
                 tooltip: 'Refresh the DB',
-                handler: function () {alert('Click: Refresh Btn');}
+                //handler: function () {alert('Click: Refresh Btn');}
             }],
 
             columns: [{
