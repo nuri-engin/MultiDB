@@ -1,0 +1,35 @@
+@-webkit-keyframes fadeIn {
+    0% {
+        background: #85B436;
+    }
+
+    100% {
+        background: none;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        background: #85B436;
+    }
+
+    100% {
+        background: none;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        background: #85B436;
+    }
+
+    100% {
+        background: none;
+    }
+}
+
+.customHilight:hover {
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+}

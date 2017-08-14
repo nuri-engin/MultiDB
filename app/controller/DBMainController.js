@@ -7,7 +7,7 @@ Ext.define('MultiDB.controller.DBMainController', {
         gridPanel: 'dbgridpanel#gridPanel',
         mainView: 'dbmainview#mainView',
         registrationBtn: 'splitbutton#registrationBtn',
-        refreshBtn: 'dbmainview dbgridpanel#refreshBtn'
+        refreshBtn: 'dbgridpanel#gridPanel tool#refreshBtn'
     },
 
     init: function (application) {
@@ -15,8 +15,8 @@ Ext.define('MultiDB.controller.DBMainController', {
             "menuitem[opt]": {
                 click: this.setFormPanel
             },
-            "dbmainview dbgridpanel#refreshBtn": {
-                viewready: this.doRefresh
+            "dbgridpanel#gridPanel tool#refreshBtn": {
+                click: this.doRefresh
             }
         });
     },

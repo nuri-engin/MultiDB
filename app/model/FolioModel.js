@@ -8,8 +8,8 @@ Ext.define('MultiDB.model.FolioModel', {
         {name: 'checkin', type: 'date'},
         {name: 'checkout', type: 'date'},
         {name: 'citime', type: 'date'},
-        {name: 'isactive', type: 'bool'},
-        {name: 'balanceok', type: 'bool'},
+        {name: 'isactive', type: 'int'},
+        {name: 'balanceok', type: 'int'},
         {name: 'lastbalance', type: 'int'}
     ],
 

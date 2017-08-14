@@ -6,12 +6,17 @@ Ext.define('MultiDB.view.DBGridPanel', {
         'Ext.toolbar.Toolbar',
         'Ext.button.Split',
         'Ext.menu.Menu',
-        'Ext.menu.Item'
+        'Ext.menu.Item',
+        'Ext.grid.plugin.CellEditing'
     ],
 
     title: 'ORest DB List',
     padding: 1,
     itemId: 'gridPanel',
+    plugins: {ptype: 'cellediting', clicksToEdit: 1},
+    headerPosition: 'top',
+    bodyBorder: true,
+    titleAlign: 'center',
     dockedItems: [
         {
             xtype: 'toolbar',
@@ -51,7 +56,12 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 type: 'refresh',
                 itemId: 'refreshBtn',
                 tooltip: 'Refresh the DB',
-                //handler: function () {alert('Click: Refresh Btn');}
+            }, {
+                type: 'help',
+                tooltip: 'Get Help',
+                callback: function (panel, tool, event) {
+                    //Here will be Help stuff..
+                }
             }],
 
             columns: [{
@@ -61,15 +71,26 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 dataIndex: 'roomno',
                 flex: 0,
                 text: 'Room No',
-                format: '0'
+                format: '0',
+                renderer: function (value, metaData, record, rowIndex, store, view) {
+                    metaData.style = 'background-color:red !important; opacity: 0.50';
+                    return value;
+                }
             }, {
                 dataIndex: 'clientname',
                 flex: 1,
-                text: 'Client Name' 
-            }, {
+                text: 'Client Name',
+                renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
+                    metaData.css = 'customHighlight';
+                    metaData['tdAttr'] = 'data-qtip="' + value + '"';
+                    return value;
+                } 
+            }, {    
                 dataIndex: 'roomtype',
                 flex: 1,
-                text: 'Room Type'
+                text: 'Room Type',
+                editor: 'textfield',
+                tdCls: 'editable-cell' 
             }, {
                 xtype: 'datecolumn',
                 dataIndex: 'checkin',
@@ -98,22 +119,34 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 xtype: 'booleancolumn',
                 dataIndex: 'isactive',
                 flex: 1,
-                text: 'Is-Active'
+                text: 'Is-Active',
+                renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
+                    if (value == 1) { return "Yes";} else { return "No";}
+                }
             }, {
                 dataIndex: 'balanceok',
                 flex: 1,
                 text: 'Balance',
-                renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
-                    console.log(arguments);
-                    var val = "All Paid!";
-
+                renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {                    
                     if (value == 0) {
                         return "All Paid";
                     } else {
                         return record.get('lastbalance');
                     }
                 }
-            }]
+            }],
+
+            listeners: {
+                itemmouseenter: function (grid, record, item, index, e, eOpts) {
+                    var node = grid.getNode(record);
+                    var cells = Ext.dom.Query.select('.editable-cell', node);
+                    console.debug(cells.length);
+
+                    for (var i = 0; i < cells.length; i++) {
+                        Ext.fly(cells[i]).highlight();
+                    }
+                }
+            }
         });
         me.callParent();
     }
