@@ -48,7 +48,7 @@ Ext.define('MultiDB.controller.DBMainController', {
         registrationBtn.setText(previewText);
     },
     doRefresh: function () {
-        console.log('this is do init!');
+        console.log('this is doRefresh!');
         this.getGridPanel().getStore().load();
     }
 
