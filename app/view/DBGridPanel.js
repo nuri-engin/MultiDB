@@ -103,11 +103,14 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 dataIndex: 'balanceok',
                 flex: 1,
                 text: 'Balance',
-                renderer: function (value, record) {
+                renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
+                    console.log(arguments);
+                    var val = "All Paid!";
+
                     if (value == 0) {
                         return "All Paid";
                     } else {
-                        return getRecord('lastbalance');
+                        return record.get('lastbalance');
                     }
                 }
             }]
