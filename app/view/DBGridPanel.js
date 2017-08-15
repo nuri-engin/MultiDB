@@ -7,7 +7,9 @@ Ext.define('MultiDB.view.DBGridPanel', {
         'Ext.button.Split',
         'Ext.menu.Menu',
         'Ext.menu.Item',
-        'Ext.grid.plugin.CellEditing'
+        'Ext.grid.plugin.CellEditing',
+        'Ext.grid.column.Column',
+        //'Ext.grid.cell.Cell'
     ],
 
     title: 'ORest DB List',
@@ -16,6 +18,7 @@ Ext.define('MultiDB.view.DBGridPanel', {
     plugins: {ptype: 'cellediting', clicksToEdit: 1},
     headerPosition: 'top',
     bodyBorder: true,
+    style: 'border: 2px solid red;',
     titleAlign: 'center',
     dockedItems: [
         {
@@ -70,6 +73,7 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 xtype: 'numbercolumn',
                 dataIndex: 'roomno',
                 flex: 0,
+                align: 'right',
                 text: 'Room No',
                 format: '0',
                 renderer: function (value, metaData, record, rowIndex, store, view) {
@@ -84,13 +88,14 @@ Ext.define('MultiDB.view.DBGridPanel', {
                     metaData.css = 'customHighlight';
                     metaData['tdAttr'] = 'data-qtip="' + value + '"';
                     return value;
-                } 
+                },
+                style: 'background: yellow' 
             }, {    
                 dataIndex: 'roomtype',
                 flex: 1,
                 text: 'Room Type',
                 editor: 'textfield',
-                tdCls: 'editable-cell' 
+                tdCls: 'editable-cell',
             }, {
                 xtype: 'datecolumn',
                 dataIndex: 'checkin',
@@ -101,7 +106,10 @@ Ext.define('MultiDB.view.DBGridPanel', {
                 xtype: 'datecolumn',
                 dataIndex: 'checkout',
                 flex: 1,
-                text: 'Check-Out'
+                text: 'Check-Out',
+                style: {
+                    'border-left': '1px solid red'
+                }
             },{
                 xtype: 'datecolumn',
                 dataIndex: 'citime',
@@ -134,6 +142,10 @@ Ext.define('MultiDB.view.DBGridPanel', {
                         return record.get('lastbalance');
                     }
                 }
+            }, {
+                //xtype: 'gridcell',
+                text: 'TPL',
+                tpl: '{roomtype} ({ex$Roomtype})'
             }],
 
             listeners: {
